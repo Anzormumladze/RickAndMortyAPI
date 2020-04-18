@@ -1,10 +1,13 @@
 import React from "react";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import EpisodesPage from "./pages/episodes";
 function App() {
   return (
-    <div>
-      <h1>RICK AND MORTY API</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={EpisodesPage} />
+      </Switch>
+    </Router>
   );
 }
 
