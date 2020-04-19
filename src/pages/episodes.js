@@ -1,11 +1,27 @@
-import React from "react";
+import React,{useEffect } from "react";
+import { fetchData } from '../api/index';
+import { connect } from "react-redux";
+import { setCurrentData } from '../redux/episodes/episodesActions'
+import EpisodesList from '../components/episodes/episodesList'
 
-const Episodes = () => {
+const Episodes = ({setData}) => {
+useEffect(()=>{
+  const fetchAPI =  async () =>{
+    const initialData = await fetchData();
+    setData(initialData)
+  }
+  fetchAPI()
+},[setData])
   return (
     <div>
-      <h1>Episodes</h1>
+      <EpisodesList/>
     </div>
   );
 };
+const dispatchStateToProps = dispatch => {
+  return {
+    setData: data => dispatch(setCurrentData(data)),
+  };
+}
 
-export default Episodes;
+export default connect(null,dispatchStateToProps)(Episodes)
