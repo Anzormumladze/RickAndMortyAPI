@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
-import { sortByName } from "../redux/episodes/episodesActions";
+import { sortByName,sortByTime } from "../redux/episodes/episodesActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BasicButtonGroup({ setSort, getData }) {
+function BasicButtonGroup({ setSort, getData,setSortByTime }) {
   const classes = useStyles();
-
   const handleSort = () => {
+    console.log(getData)
     if(getData){
       const sortArray = getData['results'];
       const sorted = (sortArray.sort((a, b) => {
@@ -35,11 +35,22 @@ function BasicButtonGroup({ setSort, getData }) {
 
     
   };
+  const handleSortByTime = () => {
+    console.log(getData)
+    if(getData){
+      const sortArray = getData['results'];
+      const sorted =  sortArray.sort(function(a,b){
+        return new Date(b.created) - new Date(a.created);
+      });
+      setSortByTime(sorted)
+    }
+  }
+
   return (
     <div className={classes.root}>
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         <Button onClick={handleSort}>Sort by name</Button>
-        <Button>Two</Button>
+        <Button onClick={handleSortByTime}>Sort by time</Button>
         <Button>Three</Button>
       </ButtonGroup>
     </div>
@@ -54,12 +65,14 @@ const mapStateToProps = (state) => {
 const dispatchStateToProps = (dispatch) => {
   return {
     setSort: (text) => dispatch(sortByName(text)),
+    setSortByTime: (time) => dispatch(sortByTime(time))
   };
 };
 
 BasicButtonGroup.propTypes = {
   getData: PropTypes.object,
-  setSort:PropTypes.func
+  setSort:PropTypes.func,
+  setSortByTime:PropTypes.func
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(BasicButtonGroup);

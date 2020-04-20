@@ -5,4 +5,5 @@ export const EpisodesActionType = {
   NEXT_PAGE: "NEXT_PAGE",
   SEARCH_EPISODE: "SEARCH_EPISODE",
   SORT_BY_NAME: " SORT_BY_NAME",
+  SORT_BY_TIME:"SORT_BY_TIME"
 };

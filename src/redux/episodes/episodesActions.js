@@ -45,3 +45,8 @@ export const sortByName = (text) => ({
   type: EpisodesActionType.SORT_BY_NAME,
   payload: text,
 });
+
+export const sortByTime = (time) => ({
+  type: EpisodesActionType.SORT_BY_TIME,
+  payload: time,
+});

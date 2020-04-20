@@ -17,6 +17,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import AppBar from "../appBar";
 import PropTypes, { object } from "prop-types";
 import Buttons from "../button";
+
 const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
@@ -131,7 +132,8 @@ const mapStateToProps = (state) => {
   return {
     getData: state.episodes.fetchData,
     getFavorites: state.episodes.favoritesId,
-    getsortedData: state.episodes.sortedData,
+    getSortedData: state.episodes.sortedData,
+    getNumberSortedData:state.episodes.sortedByTimeData
   };
 };
 
@@ -149,6 +151,7 @@ EpisodesList.propTypes = {
   setFavor: PropTypes.func,
   deleteFavor: PropTypes.func,
   setPage: PropTypes.func,
+  getNumberSortedData:PropTypes.func
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(EpisodesList);
