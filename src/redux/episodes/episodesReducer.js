@@ -3,6 +3,8 @@ import { EpisodesActionType } from "./episodesTypes";
 const INITIAL_STATE = {
   fetchData: [],
   favoritesId: [],
+  Pages: [1],
+  searchInput: "",
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -14,7 +16,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
       };
 
     case EpisodesActionType.ADD_FAVORITES:
-      console.log(action);
       return {
         ...state,
         favoritesId: [...state.favoritesId, action.payload],
@@ -24,6 +25,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         favoritesId: state.favoritesId.filter((id) => id !== action.payload),
+      };
+    case EpisodesActionType.NEXT_PAGE:
+      return {
+        ...state,
+        Pages: action.payload,
+      };
+    case EpisodesActionType.SEARCH_EPISODE:
+      return {
+        ...state,
+        fetchData: action.episode,
       };
 
     default:

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   setFavorite,
   removeFavorite,
+  setPage,
 } from "../../redux/episodes/episodesActions";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Pagination from "@material-ui/lab/Pagination";
-
+import AppBar from "../appBar";
 const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
@@ -31,7 +32,13 @@ const useStyles = makeStyles({
   },
 });
 
-const EpisodesList = ({ getData, getFavorites, setFavor, deleteFavor }) => {
+const EpisodesList = ({
+  getData,
+  getFavorites,
+  setFavor,
+  deleteFavor,
+  setPage,
+}) => {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -39,11 +46,16 @@ const EpisodesList = ({ getData, getFavorites, setFavor, deleteFavor }) => {
     } else {
       setFavor(item.id);
     }
-    console.log(getFavorites);
+  };
+  const paginationEventHandel = (event, value) => {
+    setPage(value);
   };
   const classes = useStyles();
   return (
     <div>
+      <div style={{ marginBottom: "20px" }}>
+        <AppBar />
+      </div>
       <div className={classes.cardContainer}>
         {getData.results
           ? getData.results.map((data) => {
@@ -103,7 +115,10 @@ const EpisodesList = ({ getData, getFavorites, setFavor, deleteFavor }) => {
           : null}
       </div>
       <div className={classes.paginationContainer}>
-        <Pagination count={getData.info ? getData.info.pages : 1} />
+        <Pagination
+          count={getData.info ? getData.info.pages : 1}
+          onChange={paginationEventHandel}
+        />
       </div>
     </div>
   );
@@ -120,6 +135,7 @@ const dispatchStateToProps = (dispatch) => {
   return {
     setFavor: (id) => dispatch(setFavorite(id)),
     deleteFavor: (id) => dispatch(removeFavorite(id)),
+    setPage: (page) => dispatch(setPage(page)),
   };
 };
 
