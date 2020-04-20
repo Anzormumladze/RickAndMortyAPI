@@ -3,8 +3,9 @@ import { fetchData } from "../api/index";
 import { connect } from "react-redux";
 import { setCurrentData } from "../redux/episodes/episodesActions";
 import EpisodesList from "../components/episodes/episodesList";
+import PropTypes from "prop-types";
 
-const Episodes = ({ setData, getData }) => {
+const Episodes = ({ setData }) => {
   useEffect(() => {
     const fetchAPI = async () => {
       const initialData = await fetchData();
@@ -24,10 +25,8 @@ const dispatchStateToProps = (dispatch) => {
   };
 };
 
-const mapStateToProps = (state) => {
-  return {
-    getData: state.episodes.fetchData,
-  };
+Episodes.propTypes = {
+  setData: PropTypes.func,
 };
 
-export default connect(mapStateToProps, dispatchStateToProps)(Episodes);
+export default connect(null, dispatchStateToProps)(Episodes);

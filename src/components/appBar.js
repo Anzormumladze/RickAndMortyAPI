@@ -9,6 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { searchEpisode } from "../redux/episodes/episodesActions";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -110,6 +111,10 @@ const dispatchStateToProps = (dispatch) => {
   return {
     getInput: (text) => dispatch(searchEpisode(text)),
   };
+};
+
+SearchAppBar.propTypes = {
+  getInput: PropTypes.func,
 };
 
 export default connect(null, dispatchStateToProps)(SearchAppBar);

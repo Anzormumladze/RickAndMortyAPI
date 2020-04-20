@@ -1,9 +1,9 @@
 import { EpisodesActionType } from "./episodesTypes";
 
 const INITIAL_STATE = {
-  fetchData: [],
+  fetchData: {},
   favoritesId: [],
-  Pages: [1],
+  Pages: [],
   searchInput: "",
 };
 

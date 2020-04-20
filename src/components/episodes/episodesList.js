@@ -15,6 +15,8 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Pagination from "@material-ui/lab/Pagination";
 import AppBar from "../appBar";
+import PropTypes, { object } from "prop-types";
+
 const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
@@ -137,6 +139,14 @@ const dispatchStateToProps = (dispatch) => {
     deleteFavor: (id) => dispatch(removeFavorite(id)),
     setPage: (page) => dispatch(setPage(page)),
   };
+};
+
+EpisodesList.propTypes = {
+  getData: PropTypes.object,
+  getFavorites: PropTypes.arrayOf(object),
+  setFavor: PropTypes.func,
+  deleteFavor: PropTypes.func,
+  setPage: PropTypes.func,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(EpisodesList);
