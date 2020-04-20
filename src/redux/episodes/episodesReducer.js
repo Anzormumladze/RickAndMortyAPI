@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   favoritesId: [],
   Pages: [],
   searchInput: "",
+  sortedData: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -35,6 +36,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchData: action.episode,
+      };
+    case EpisodesActionType.SORT_BY_NAME:
+      return {
+        ...state,
+        sortedData: action.episode,
       };
 
     default:

@@ -1,4 +1,5 @@
 import { EpisodesActionType } from "./episodesTypes";
+import axios from "axios";
 
 export const setCurrentData = (data) => ({
   type: EpisodesActionType.SET_CURRENT_DATA,
@@ -18,21 +19,29 @@ export const removeFavorite = (id) => ({
 export const setPage = (page) => {
   return (dispatch) => {
     const apiUrl = `https://rickandmortyapi.com/api/episode?page=${page}`;
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: EpisodesActionType.SEARCH_EPISODE, episode: data });
+    console.log(apiUrl);
+    axios.get(apiUrl).then((response) => {
+      dispatch({
+        type: EpisodesActionType.SEARCH_EPISODE,
+        episode: response.data,
       });
+    });
   };
 };
 
 export const searchEpisode = (text) => {
   return (dispatch) => {
     const apiUrl = `https://rickandmortyapi.com/api/episode/?name=${text}`;
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: EpisodesActionType.SEARCH_EPISODE, episode: data });
+    axios.get(apiUrl).then((response) => {
+      dispatch({
+        type: EpisodesActionType.SEARCH_EPISODE,
+        episode: response.data,
       });
+    });
   };
 };
+
+export const sortByName = (text) => ({
+  type: EpisodesActionType.SORT_BY_NAME,
+  payload: text,
+});

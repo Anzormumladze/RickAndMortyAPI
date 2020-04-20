@@ -16,7 +16,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import Pagination from "@material-ui/lab/Pagination";
 import AppBar from "../appBar";
 import PropTypes, { object } from "prop-types";
-
+import Buttons from "../button";
 const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
@@ -58,6 +58,7 @@ const EpisodesList = ({
       <div style={{ marginBottom: "20px" }}>
         <AppBar />
       </div>
+      <Buttons />
       <div className={classes.cardContainer}>
         {getData.results
           ? getData.results.map((data) => {
@@ -130,6 +131,7 @@ const mapStateToProps = (state) => {
   return {
     getData: state.episodes.fetchData,
     getFavorites: state.episodes.favoritesId,
+    getsortedData: state.episodes.sortedData,
   };
 };
 
