@@ -49,3 +49,15 @@ export const sortByTime = (time) => ({
   type: EpisodesActionType.SORT_BY_TIME,
   payload: time,
 });
+
+export const detailPage = (url) => {
+  return (dispatch) => {
+    const apiUrl = url;
+    axios.get(apiUrl).then((response) => {
+      dispatch({
+        type: EpisodesActionType.SHOW_MORE,
+        episode: response.data,
+      });
+    });
+  };
+};

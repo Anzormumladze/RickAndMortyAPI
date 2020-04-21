@@ -6,4 +6,5 @@ export const EpisodesActionType = {
   SEARCH_EPISODE: "SEARCH_EPISODE",
   SORT_BY_NAME: " SORT_BY_NAME",
   SORT_BY_TIME: "SORT_BY_TIME",
+  SHOW_MORE: "SHOW_MORE",
 };

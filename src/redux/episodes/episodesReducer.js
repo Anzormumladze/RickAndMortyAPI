@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   searchInput: "",
   sortedData: [],
   sortedByTimeData: [],
+  detailData: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -47,6 +48,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         sortedByTimeData: action.episode,
+      };
+
+    case EpisodesActionType.SHOW_MORE:
+      return {
+        ...state,
+        detailData: action.episode,
       };
     default:
       return state;
