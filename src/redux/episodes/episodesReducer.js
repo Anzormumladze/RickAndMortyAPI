@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   Pages: [],
   searchInput: "",
   sortedData: [],
-  sortedByTimeData:[]
+  sortedByTimeData: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -39,18 +39,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
         fetchData: action.episode,
       };
     case EpisodesActionType.SORT_BY_NAME:
-      console.log(action)
       return {
         ...state,
         sortedData: action.episode,
       };
     case EpisodesActionType.SORT_BY_TIME:
-      console.log(action)
-      return{
+      return {
         ...state,
-        sortedByTimeData:action.episode
-      }
-
+        sortedByTimeData: action.episode,
+      };
     default:
       return state;
   }

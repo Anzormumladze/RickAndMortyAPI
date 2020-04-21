@@ -5,7 +5,7 @@ import { setCurrentData } from "../redux/episodes/episodesActions";
 import EpisodesList from "../components/episodes/episodesList";
 import PropTypes from "prop-types";
 
-const Episodes = ({ setData,history }) => {
+const Episodes = ({ setData, history }) => {
   useEffect(() => {
     const fetchAPI = async () => {
       const initialData = await fetchData();
@@ -27,6 +27,7 @@ const dispatchStateToProps = (dispatch) => {
 
 Episodes.propTypes = {
   setData: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default connect(null, dispatchStateToProps)(Episodes);

@@ -41,7 +41,7 @@ const EpisodesList = ({
   setFavor,
   deleteFavor,
   setPage,
-  history
+  history,
 }) => {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
@@ -55,9 +55,9 @@ const EpisodesList = ({
     setPage(value);
   };
 
-  const moreDetailsHanlder = () =>{
-    history.push("/episode/details")
-  }
+  const moreDetailsHanlder = () => {
+    history.push("/episode/details");
+  };
   const classes = useStyles();
   return (
     <div>
@@ -103,7 +103,9 @@ const EpisodesList = ({
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button onClick ={()=>moreDetailsHanlder()} size="medium">show more</Button>
+                    <Button onClick={() => moreDetailsHanlder()} size="medium">
+                      show more
+                    </Button>
                     <Button
                       onClick={() => clickHandler(data)}
                       startIcon={
@@ -138,7 +140,7 @@ const mapStateToProps = (state) => {
     getData: state.episodes.fetchData,
     getFavorites: state.episodes.favoritesId,
     getSortedData: state.episodes.sortedData,
-    getNumberSortedData:state.episodes.sortedByTimeData
+    getNumberSortedData: state.episodes.sortedByTimeData,
   };
 };
 
@@ -156,7 +158,8 @@ EpisodesList.propTypes = {
   setFavor: PropTypes.func,
   deleteFavor: PropTypes.func,
   setPage: PropTypes.func,
-  getNumberSortedData:PropTypes.func
+  getNumberSortedData: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(EpisodesList);
