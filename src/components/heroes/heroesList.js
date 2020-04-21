@@ -19,8 +19,9 @@ import ShareIcon from "@material-ui/icons/Share";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import Pagination from "@material-ui/lab/Pagination";
 import Header from "./header";
+import PropTypes, { object } from "prop-types";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
     flexFlow: "row wrap",
@@ -40,15 +41,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginBottom: "10px",
   },
-}));
+});
 
-function RecipeReviewCard({
-  getData,
-  getFavorites,
-  setFavor,
-  deleteFavor,
-  setPage,
-}) {
+function HeroList({ getData, getFavorites, setFavor, deleteFavor, setPage }) {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -59,6 +54,7 @@ function RecipeReviewCard({
   };
 
   const paginationEventHandel = (event, value) => {
+    console.log(typeof setPage);
     setPage(value);
   };
   const classes = useStyles();
@@ -153,4 +149,12 @@ const dispatchStateToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, dispatchStateToProps)(RecipeReviewCard);
+HeroList.propTypes = {
+  getData: PropTypes.object,
+  getFavorites: PropTypes.arrayOf(object),
+  setFavor: PropTypes.func,
+  deleteFavor: PropTypes.func,
+  setPage: PropTypes.func,
+};
+
+export default connect(mapStateToProps, dispatchStateToProps)(HeroList);

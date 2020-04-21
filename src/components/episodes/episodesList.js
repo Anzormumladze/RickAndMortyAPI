@@ -167,6 +167,7 @@ EpisodesList.propTypes = {
   setPage: PropTypes.func,
   getNumberSortedData: PropTypes.func,
   history: PropTypes.object,
+  setDetailPageData: PropTypes.func,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(EpisodesList);

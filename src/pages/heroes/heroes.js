@@ -3,6 +3,7 @@ import { fetchCharacterData } from "../../api/index";
 import { connect } from "react-redux";
 import { setCurrentData } from "../../redux/heroes/heroesAction";
 import HeroesList from "../../components/heroes/heroesList";
+import PropTypes from "prop-types";
 
 const Heroes = ({ setData }) => {
   useEffect(() => {
@@ -25,4 +26,9 @@ const mapStateToProps = (state) => {
     getData: state.heroes.fetchData,
   };
 };
+
+Heroes.propTypes = {
+  setData: PropTypes.func,
+};
+
 export default connect(mapStateToProps, dispatchStateToProps)(Heroes);
