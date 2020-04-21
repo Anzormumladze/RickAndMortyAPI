@@ -5,7 +5,7 @@ import { setCurrentData } from "../redux/episodes/episodesActions";
 import EpisodesList from "../components/episodes/episodesList";
 import PropTypes from "prop-types";
 
-const Episodes = ({ setData }) => {
+const Episodes = ({ setData,history }) => {
   useEffect(() => {
     const fetchAPI = async () => {
       const initialData = await fetchData();
@@ -15,7 +15,7 @@ const Episodes = ({ setData }) => {
   }, [setData]);
   return (
     <div>
-      <EpisodesList />
+      <EpisodesList history={history} />
     </div>
   );
 };

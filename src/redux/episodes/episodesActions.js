@@ -19,7 +19,6 @@ export const removeFavorite = (id) => ({
 export const setPage = (page) => {
   return (dispatch) => {
     const apiUrl = `https://rickandmortyapi.com/api/episode?page=${page}`;
-    console.log(apiUrl);
     axios.get(apiUrl).then((response) => {
       dispatch({
         type: EpisodesActionType.SEARCH_EPISODE,

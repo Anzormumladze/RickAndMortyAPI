@@ -41,7 +41,9 @@ const EpisodesList = ({
   setFavor,
   deleteFavor,
   setPage,
+  history
 }) => {
+  console.log(history)
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -53,6 +55,10 @@ const EpisodesList = ({
   const paginationEventHandel = (event, value) => {
     setPage(value);
   };
+
+  const moreDetailsHanlder = () =>{
+    history.push("/episode/details")
+  }
   const classes = useStyles();
   return (
     <div>
@@ -98,7 +104,7 @@ const EpisodesList = ({
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="medium">show more</Button>
+                    <Button onClick ={()=>moreDetailsHanlder()} size="medium">show more</Button>
                     <Button
                       onClick={() => clickHandler(data)}
                       startIcon={
@@ -133,7 +139,7 @@ const mapStateToProps = (state) => {
     getData: state.episodes.fetchData,
     getFavorites: state.episodes.favoritesId,
     getSortedData: state.episodes.sortedData,
-    getNumberSortedData:state.episodes.sortedByTimeData
+    getNumberSortedData:state.episodes.array
   };
 };
 
