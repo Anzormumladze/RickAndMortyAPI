@@ -3,6 +3,8 @@ import { heroesActionType } from "./heroesTypes";
 const INITIAL_STATE = {
   fetchData: [],
   favoritesId: [],
+  Pages: [],
+  searchInput: "",
 };
 
 const heroesReducer = (state = INITIAL_STATE, action) => {
@@ -22,6 +24,16 @@ const heroesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         favoritesId: state.favoritesId.filter((id) => id !== action.payload),
+      };
+    case heroesActionType.NEXT_PAGE:
+      return {
+        ...state,
+        Pages: action.payload,
+      };
+    case heroesActionType.SEARCH_EPISODE:
+      return {
+        ...state,
+        fetchData: action.episode,
       };
     default:
       return state;

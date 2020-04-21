@@ -11,7 +11,7 @@ const Heroes = ({ setData }) => {
       setData(initialData);
     };
     fetchAPI();
-  }, []);
+  }, [setData]);
   return <HeroesList />;
 };
 const dispatchStateToProps = (dispatch) => {
@@ -20,4 +20,9 @@ const dispatchStateToProps = (dispatch) => {
   };
 };
 
-export default connect(null, dispatchStateToProps)(Heroes);
+const mapStateToProps = (state) => {
+  return {
+    getData: state.heroes.fetchData,
+  };
+};
+export default connect(mapStateToProps, dispatchStateToProps)(Heroes);

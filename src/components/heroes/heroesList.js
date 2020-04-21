@@ -1,7 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { setFavorite, removeFavorite } from "../../redux/heroes/heroesAction";
+import {
+  setFavorite,
+  removeFavorite,
+  setPage,
+} from "../../redux/heroes/heroesAction";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -10,10 +14,11 @@ import Button from "@material-ui/core/Button";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import Pagination from "@material-ui/lab/Pagination";
+import Header from "./header";
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -30,22 +35,20 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: "90%",
   },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: red[500],
+  paginationContainer: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "10px",
   },
 }));
 
-function RecipeReviewCard({ getData, getFavorites, setFavor, deleteFavor }) {
+function RecipeReviewCard({
+  getData,
+  getFavorites,
+  setFavor,
+  deleteFavor,
+  setPage,
+}) {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -54,65 +57,83 @@ function RecipeReviewCard({ getData, getFavorites, setFavor, deleteFavor }) {
       setFavor(item.id);
     }
   };
+
+  const paginationEventHandel = (event, value) => {
+    setPage(value);
+  };
   const classes = useStyles();
 
   return (
-    <div className={classes.cardContainer}>
-      {getData.results
-        ? getData.results.map((data) => {
-            return (
-              <Card className={classes.root} key={data.id}>
-                <CardHeader
-                  title={data.name}
-                  subheader={`ID:${data.id} STATUS:${data.status}`}
-                />
-                <CardMedia
-                  className={classes.media}
-                  image={data.image}
-                  title="Paella dish"
-                />
-                <CardContent>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="span"
+    <div>
+      <div style={{ marginBottom: "20px" }}>
+        <Header />
+      </div>
+      <div className={classes.cardContainer}>
+        {getData.results
+          ? getData.results.map((data) => {
+              return (
+                <Card className={classes.root} key={data.id}>
+                  <CardHeader
+                    title={data.name}
+                    subheader={`ID:${data.id} STATUS:${data.status}`}
+                  />
+                  <CardMedia
+                    className={classes.media}
+                    image={data.image}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
                     >
-                      Species:{data.species}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="span"
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="span"
+                      >
+                        Species:{data.species}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="span"
+                      >
+                        Gender:{data.gender}
+                      </Typography>
+                    </div>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <Button
+                      onClick={() => clickHandler(data)}
+                      startIcon={
+                        isInFavorite(data.id) ? (
+                          <FavoriteIcon />
+                        ) : (
+                          <FavoriteBorderIcon />
+                        )
+                      }
+                      size="medium"
                     >
-                      Gender:{data.gender}
-                    </Typography>
-                  </div>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <Button
-                    onClick={() => clickHandler(data)}
-                    startIcon={
-                      isInFavorite(data.id) ? (
-                        <FavoriteIcon />
-                      ) : (
-                        <FavoriteBorderIcon />
-                      )
-                    }
-                    size="medium"
-                  >
-                    {isInFavorite(data.id) ? "remove" : "add"}
-                  </Button>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            );
-          })
-        : null}
+                      {isInFavorite(data.id) ? "remove" : "add"}
+                    </Button>
+                    <IconButton aria-label="share">
+                      <ShareIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              );
+            })
+          : null}
+        <div className={classes.paginationContainer}>
+          <Pagination
+            count={getData.info ? getData.info.pages : 1}
+            onChange={paginationEventHandel}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -128,6 +149,7 @@ const dispatchStateToProps = (dispatch) => {
   return {
     setFavor: (id) => dispatch(setFavorite(id)),
     deleteFavor: (id) => dispatch(removeFavorite(id)),
+    setPage: (page) => dispatch(setPage(page)),
   };
 };
 
