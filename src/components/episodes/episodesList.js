@@ -4,6 +4,7 @@ import {
   setFavorite,
   removeFavorite,
   setPage,
+  detailPage,
 } from "../../redux/episodes/episodesActions";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -42,6 +43,7 @@ const EpisodesList = ({
   deleteFavor,
   setPage,
   history,
+  setDetailPageData,
 }) => {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
@@ -55,7 +57,8 @@ const EpisodesList = ({
     setPage(value);
   };
 
-  const moreDetailsHanlder = () => {
+  const moreDetailsHanlder = (data) => {
+    setDetailPageData(data.url);
     history.push("/episode/details");
   };
   const classes = useStyles();
@@ -103,7 +106,10 @@ const EpisodesList = ({
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button onClick={() => moreDetailsHanlder()} size="medium">
+                    <Button
+                      onClick={() => moreDetailsHanlder(data)}
+                      size="medium"
+                    >
                       show more
                     </Button>
                     <Button
@@ -149,6 +155,7 @@ const dispatchStateToProps = (dispatch) => {
     setFavor: (id) => dispatch(setFavorite(id)),
     deleteFavor: (id) => dispatch(removeFavorite(id)),
     setPage: (page) => dispatch(setPage(page)),
+    setDetailPageData: (url) => dispatch(detailPage(url)),
   };
 };
 

@@ -7,6 +7,8 @@ const INITIAL_STATE = {
   searchInput: "",
   sortedData: [],
   sortedByTimeData: [],
+  detailData: [],
+  heroData: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -47,6 +49,17 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         sortedByTimeData: action.episode,
+      };
+
+    case EpisodesActionType.SHOW_MORE:
+      return {
+        ...state,
+        detailData: action.episode,
+      };
+    case EpisodesActionType.SET_HERO_LIST:
+      return {
+        ...state,
+        heroData: action.payload,
       };
     default:
       return state;

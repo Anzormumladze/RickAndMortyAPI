@@ -49,3 +49,27 @@ export const sortByTime = (time) => ({
   type: EpisodesActionType.SORT_BY_TIME,
   payload: time,
 });
+
+export const detailPage = (url) => {
+  return (dispatch) => {
+    const apiUrl = url;
+    axios.get(apiUrl).then((response) => {
+      dispatch({
+        type: EpisodesActionType.SHOW_MORE,
+        episode: response.data,
+      });
+    });
+  };
+};
+
+export const herolist = (list) => {
+  return (dispatch) => {
+    const apiUrl = `https://rickandmortyapi.com/api/character/${list}`;
+    axios.get(apiUrl).then((response) => {
+      dispatch({
+        type: EpisodesActionType.SET_HERO_LIST,
+        payload: response.data,
+      });
+    });
+  };
+};
