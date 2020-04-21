@@ -10,3 +10,13 @@ export const fetchData = async () => {
     console.log(error);
   }
 };
+
+export const fetchCharacterData = async () => {
+  const url = "https://rickandmortyapi.com/api/character/";
+  try {
+    const { data } = await axios.get(url);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
