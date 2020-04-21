@@ -51,7 +51,7 @@ function BasicButtonGroup({ setSort, getData,setSortByTime }) {
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         <Button onClick={handleSort}>Sort by name</Button>
         <Button onClick={handleSortByTime}>Sort by time</Button>
-        <Button>Three</Button>
+        <Button>Sort by episodes</Button>
       </ButtonGroup>
     </div>
   );

@@ -43,7 +43,6 @@ const EpisodesList = ({
   setPage,
   history
 }) => {
-  console.log(history)
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -139,7 +138,7 @@ const mapStateToProps = (state) => {
     getData: state.episodes.fetchData,
     getFavorites: state.episodes.favoritesId,
     getSortedData: state.episodes.sortedData,
-    getNumberSortedData:state.episodes.array
+    getNumberSortedData:state.episodes.sortedByTimeData
   };
 };
 
