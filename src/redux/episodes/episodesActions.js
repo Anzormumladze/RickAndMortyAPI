@@ -61,3 +61,15 @@ export const detailPage = (url) => {
     });
   };
 };
+
+export const herolist = (list) => {
+  return (dispatch) => {
+    const apiUrl = `https://rickandmortyapi.com/api/character/${list}`;
+    axios.get(apiUrl).then((response) => {
+      dispatch({
+        type: EpisodesActionType.SET_HERO_LIST,
+        payload: response.data,
+      });
+    });
+  };
+};

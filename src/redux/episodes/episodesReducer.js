@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   sortedData: [],
   sortedByTimeData: [],
   detailData: [],
+  heroData: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -54,6 +55,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         detailData: action.episode,
+      };
+    case EpisodesActionType.SET_HERO_LIST:
+      return {
+        ...state,
+        heroData: action.payload,
       };
     default:
       return state;

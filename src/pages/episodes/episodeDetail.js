@@ -11,6 +11,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import {
   setFavorite,
   removeFavorite,
+  herolist,
+  getHeroData,
 } from "../../redux/episodes/episodesActions";
 import FbComment from "../../components/fbcomment";
 
@@ -18,6 +20,8 @@ const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
     marginTop: "200px",
   },
   card: {
@@ -30,9 +34,13 @@ const EpisodeDetail = ({
   getFavorites,
   setFavor,
   deleteFavor,
+  setHeroList,
+  getHeroData,
+  history,
 }) => {
-  console.log(getDetailData.characters);
-
+  getHeroData.map((element) => {
+    console.log(element.name);
+  });
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -41,6 +49,22 @@ const EpisodeDetail = ({
       setFavor(item.id);
     }
   };
+
+  const heroShowHandler = (data) => {
+    let numberPattern = /\d+/g;
+
+    const newarr = data.characters.map((element) => {
+      return element.match(numberPattern);
+    });
+
+    const characterlist = [...newarr].join(",");
+    setHeroList(characterlist);
+  };
+
+  const heroPageHandler = (data) => {
+    history.push("/heroes");
+  };
+
   const classes = useStyles();
   return (
     <div className={classes.cardContainer}>
@@ -82,6 +106,27 @@ const EpisodeDetail = ({
         </CardActions>
       </Card>
       <div>
+        <Button onClick={() => heroShowHandler(getDetailData)}>
+          SHOW HEROES LIST
+        </Button>
+      </div>
+      <div>
+        {getHeroData.map((data) => {
+          return (
+            <CardContent>
+              <Typography
+                onClick={() => heroPageHandler(data)}
+                className={classes.title}
+                color="textSecondary"
+                noWrap
+              >
+                {data.name}
+              </Typography>
+            </CardContent>
+          );
+        })}
+      </div>
+      <div>
         <FbComment />
       </div>
     </div>
@@ -92,6 +137,7 @@ const mapStateToProps = (state) => {
   return {
     getDetailData: state.episodes.detailData,
     getFavorites: state.episodes.favoritesId,
+    getHeroData: state.episodes.heroData,
   };
 };
 
@@ -99,6 +145,7 @@ const dispatchStateToProps = (dispatch) => {
   return {
     setFavor: (id) => dispatch(setFavorite(id)),
     deleteFavor: (id) => dispatch(removeFavorite(id)),
+    setHeroList: (list) => dispatch(herolist(list)),
   };
 };
 

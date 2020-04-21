@@ -7,4 +7,5 @@ export const EpisodesActionType = {
   SORT_BY_NAME: " SORT_BY_NAME",
   SORT_BY_TIME: "SORT_BY_TIME",
   SHOW_MORE: "SHOW_MORE",
+  SET_HERO_LIST: "SET_HERO_LIST",
 };
