@@ -1,4 +1,5 @@
 import { heroesActionType } from "./heroesTypes";
+
 import axios from "axios";
 
 export const setCurrentData = (data) => ({

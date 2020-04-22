@@ -10,6 +10,7 @@ import {
   searchSpecies,
 } from "../../redux/heroes/heroesAction";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 function RadioButtonsGroup({ setGender, setStatus, setSpecies }) {
   const handleChange = (event) => {
@@ -96,6 +97,12 @@ const dispatchStateToProps = (dispatch) => {
     setStatus: (text) => dispatch(searchStatus(text)),
     setSpecies: (text) => dispatch(searchSpecies(text)),
   };
+};
+
+RadioButtonsGroup.propTypes = {
+  setGender: PropTypes.func,
+  setStatus: PropTypes.func,
+  setSpecies: PropTypes.func,
 };
 
 export default connect(null, dispatchStateToProps)(RadioButtonsGroup);

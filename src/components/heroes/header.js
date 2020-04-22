@@ -121,4 +121,11 @@ const mapStateToProps = (state) => {
   };
 };
 
+Header.propTypes = {
+  getInput: PropTypes.func,
+  getGender: PropTypes.object,
+  getStatus: PropTypes.object,
+  getSpecies: PropTypes.object,
+};
+
 export default connect(mapStateToProps, dispatchStateToProps)(Header);

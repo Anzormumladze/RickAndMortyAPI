@@ -4,7 +4,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 import { sortByName, sortByStatus } from "../../redux/heroes/heroesAction";
 import { connect } from "react-redux";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SortButton({ getData, setSort, setSortByStatus }) {
-  console.log(setSortByStatus);
   const classes = useStyles();
   const handleNameSort = () => {
     if (getData) {
@@ -37,7 +36,6 @@ function SortButton({ getData, setSort, setSortByStatus }) {
       const sorted = sortArray.sort((a, b) => {
         return a.status === b.status ? 0 : a.status < b.status ? -1 : 1;
       });
-      //   console.log(sorted);
       setSortByStatus(sorted);
     }
   };
@@ -63,10 +61,10 @@ const dispatchStateToProps = (dispatch) => {
   };
 };
 
-// BasicButtonGroup.propTypes = {
-//   getData: PropTypes.object,
-//   setSort: PropTypes.func,
-//   setSortByTime: PropTypes.func,
-// };
+SortButton.propTypes = {
+  getData: PropTypes.object,
+  setSort: PropTypes.func,
+  setSortByStatus: PropTypes.func,
+};
 
 export default connect(mapStateToProps, dispatchStateToProps)(SortButton);
