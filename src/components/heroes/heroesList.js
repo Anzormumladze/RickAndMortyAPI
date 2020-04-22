@@ -20,6 +20,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import Pagination from "@material-ui/lab/Pagination";
 import Header from "./header";
 import PropTypes, { object } from "prop-types";
+import Checkbox from "./checkbox";
 
 const useStyles = makeStyles({
   cardContainer: {
@@ -63,6 +64,9 @@ function HeroList({ getData, getFavorites, setFavor, deleteFavor, setPage }) {
     <div>
       <div style={{ marginBottom: "20px" }}>
         <Header />
+      </div>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Checkbox />
       </div>
       <div className={classes.cardContainer}>
         {getData.results

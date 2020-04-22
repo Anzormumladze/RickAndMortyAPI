@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   favoritesId: [],
   Pages: [],
   searchInput: "",
+  searchGender: [],
 };
 
 const heroesReducer = (state = INITIAL_STATE, action) => {
@@ -34,6 +35,11 @@ const heroesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchData: action.episode,
+      };
+    case heroesActionType.SEARCH_GENDER:
+      return {
+        ...state,
+        searchGender: action.payload,
       };
     default:
       return state;

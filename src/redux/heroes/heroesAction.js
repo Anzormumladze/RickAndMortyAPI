@@ -28,10 +28,14 @@ export const setPage = (page) => {
   };
 };
 
-export const searchEpisode = (text) => {
+export const searchEpisode = (text, gender) => {
+  const apiUrl = `https://rickandmortyapi.com/api/character/?name=${text}`;
+  let changeableUrl = apiUrl;
+  if (gender) {
+    changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&gender=${gender}`;
+  }
   return (dispatch) => {
-    const apiUrl = `https://rickandmortyapi.com/api/character/?name=${text}`;
-    axios.get(apiUrl).then((response) => {
+    axios.get(changeableUrl).then((response) => {
       dispatch({
         type: heroesActionType.SEARCH_EPISODE,
         episode: response.data,
@@ -39,3 +43,8 @@ export const searchEpisode = (text) => {
     });
   };
 };
+
+export const searchGender = (text) => ({
+  type: heroesActionType.SEARCH_GENDER,
+  payload: text,
+});
