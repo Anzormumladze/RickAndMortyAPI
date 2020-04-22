@@ -12,9 +12,9 @@ import {
   setFavorite,
   removeFavorite,
   herolist,
-  getHeroData,
 } from "../../redux/episodes/episodesActions";
 import FbComment from "../../components/fbcomment";
+import PropTypes, { object } from "prop-types";
 
 const useStyles = makeStyles({
   cardContainer: {
@@ -38,9 +38,6 @@ const EpisodeDetail = ({
   getHeroData,
   history,
 }) => {
-  getHeroData.map((element) => {
-    console.log(element.name);
-  });
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -61,7 +58,7 @@ const EpisodeDetail = ({
     setHeroList(characterlist);
   };
 
-  const heroPageHandler = (data) => {
+  const heroPageHandler = () => {
     history.push("/heroes");
   };
 
@@ -113,7 +110,7 @@ const EpisodeDetail = ({
       <div>
         {getHeroData.map((data) => {
           return (
-            <CardContent>
+            <CardContent key={data.id}>
               <Typography
                 onClick={() => heroPageHandler(data)}
                 className={classes.title}
@@ -147,6 +144,16 @@ const dispatchStateToProps = (dispatch) => {
     deleteFavor: (id) => dispatch(removeFavorite(id)),
     setHeroList: (list) => dispatch(herolist(list)),
   };
+};
+
+EpisodeDetail.propTypes = {
+  getDetailData: PropTypes.array,
+  getFavorites: PropTypes.arrayOf(object),
+  setFavor: PropTypes.func,
+  deleteFavor: PropTypes.func,
+  setHeroList: PropTypes.func,
+  getHeroData: PropTypes.arrayOf(object),
+  history: PropTypes.object,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(EpisodeDetail);
