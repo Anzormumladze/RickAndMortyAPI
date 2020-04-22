@@ -18,7 +18,7 @@ function RadioButtonsGroup({ setGender }) {
       <RadioGroup aria-label="gender" name="gender1" onChange={handleChange}>
         <FormControlLabel value="Female" control={<Radio />} label="Female" />
         <FormControlLabel value="Male" control={<Radio />} label="Male" />
-        <FormControlLabel value="Other" control={<Radio />} label="Other" />
+        <FormControlLabel value="unknown" control={<Radio />} label="unknown" />
       </RadioGroup>
     </FormControl>
   );
