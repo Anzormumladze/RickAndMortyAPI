@@ -87,3 +87,8 @@ export const detailPage = (url) => {
     });
   };
 };
+
+export const setEpisodeList = (list) => ({
+  type: heroesActionType.SET_EPISODE_LIST,
+  payload: list,
+});
