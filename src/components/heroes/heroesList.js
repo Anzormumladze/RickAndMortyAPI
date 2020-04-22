@@ -146,6 +146,7 @@ const mapStateToProps = (state) => {
   return {
     getData: state.heroes.fetchData,
     getFavorites: state.heroes.favoritesId,
+    getSortedDataBySpecies: state.heroes.sortedDataSpecies,
     getSortedData: state.heroes.sortedData,
   };
 };

@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
-import { sortByName } from "../../redux/heroes/heroesAction";
+import { sortByName, sortByStatus } from "../../redux/heroes/heroesAction";
 import { connect } from "react-redux";
 // import PropTypes from "prop-types";
 
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SortButton({ getData, setSort }) {
-  //   console.log(getData);
+function SortButton({ getData, setSort, setSortByStatus }) {
+  console.log(setSortByStatus);
   const classes = useStyles();
   const handleNameSort = () => {
     if (getData) {
@@ -31,20 +31,21 @@ function SortButton({ getData, setSort }) {
       setSort(sorted);
     }
   };
-  //   const handleSortByTime = () => {
-  //     if (getData) {
-  //       const sortArray = getData["results"];
-  //       const sorted = sortArray.sort(function (a, b) {
-  //         return new Date(b.created) - new Date(a.created);
-  //       });
-  //       setSortByTime(sorted);
-  //     }
-  //   };
+  const handleSortByStatus = () => {
+    if (getData) {
+      const sortArray = getData["results"];
+      const sorted = sortArray.sort((a, b) => {
+        return a.status === b.status ? 0 : a.status < b.status ? -1 : 1;
+      });
+      //   console.log(sorted);
+      setSortByStatus(sorted);
+    }
+  };
   return (
     <div className={classes.root}>
       <ButtonGroup color="primary" aria-label="outlined primary button group">
-        <Button onClick={handleNameSort}>Sort by name</Button>
-        <Button>Sort by time</Button>
+        <Button onClick={handleNameSort}>Sort by Name</Button>
+        <Button onClick={handleSortByStatus}>Sort by Status</Button>
       </ButtonGroup>
     </div>
   );
@@ -58,6 +59,7 @@ const mapStateToProps = (state) => {
 const dispatchStateToProps = (dispatch) => {
   return {
     setSort: (text) => dispatch(sortByName(text)),
+    setSortByStatus: (text) => dispatch(sortByStatus(text)),
   };
 };
 

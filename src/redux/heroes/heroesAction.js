@@ -69,3 +69,8 @@ export const sortByName = (text) => ({
   type: heroesActionType.SORT_BY_NAME,
   payload: text,
 });
+
+export const sortByStatus = (text) => ({
+  type: heroesActionType.SORT_BY_STATUS,
+  payload: text,
+});

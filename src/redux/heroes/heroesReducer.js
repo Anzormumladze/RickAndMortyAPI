@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   searchStatus: [],
   searchSpecies: [],
   sortedData: [],
+  sortedDataSpecies: [],
 };
 
 const heroesReducer = (state = INITIAL_STATE, action) => {
@@ -58,6 +59,12 @@ const heroesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         sortedData: action.payload,
+      };
+    case heroesActionType.SORT_BY_STATUS:
+      console.log(action);
+      return {
+        ...state,
+        sortedDataSpecies: action.payload,
       };
     default:
       return state;
