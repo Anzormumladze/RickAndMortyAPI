@@ -10,4 +10,5 @@ export const heroesActionType = {
   SORT_BY_NAME: "SORT_BY_NAME",
   SORT_BY_STATUS: "SORT_BY_STATUS",
   SHOW_MORE: "SHOW_MORE",
+  SET_EPISODE_LIST: "SET_EPISODE_LIS",
 };

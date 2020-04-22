@@ -10,12 +10,19 @@ import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { makeStyles } from "@material-ui/core/styles";
-import { setFavorite, removeFavorite } from "../../redux/heroes/heroesAction";
+import FbComments from "../../components/fbcomment";
+import {
+  setFavorite,
+  removeFavorite,
+  setEpisodeList,
+} from "../../redux/heroes/heroesAction";
 const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-end",
+    alignItems: "center",
+    flexDirection: "column",
+    marginTop: "200px",
   },
   root: {
     width: "350px",
@@ -31,6 +38,8 @@ const HeroesDetails = ({
   deleteFavor,
   setFavor,
   getFavorites,
+  setEpisodeList,
+  getEpisodeList,
 }) => {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
@@ -41,9 +50,19 @@ const HeroesDetails = ({
     }
   };
 
+  const episodeShowhandler = (data) => {
+    let numberPattern = /\d+/g;
+
+    const newarr = data.episode.map((element) => {
+      return element.match(numberPattern);
+    });
+
+    const episodelist = [...newarr].join(",");
+    setEpisodeList(episodelist);
+  };
+
   const classes = useStyles();
 
-  console.log(getDetailData);
   return (
     <div className={classes.cardContainer}>
       <Card className={classes.root} key={getDetailData.id}>
@@ -92,6 +111,21 @@ const HeroesDetails = ({
           }
         </CardActions>
       </Card>
+      <div>
+        <Button onClick={() => episodeShowhandler(getDetailData)}>
+          SHOW EPISODE LIST
+        </Button>
+      </div>
+      <div>
+        <CardContent>
+          <Typography color="textSecondary" noWrap>
+            {getEpisodeList}
+          </Typography>
+        </CardContent>
+      </div>
+      <div>
+        <FbComments />
+      </div>
     </div>
   );
 };
@@ -100,6 +134,7 @@ const mapStateToProps = (state) => {
   return {
     getDetailData: state.heroes.detailData,
     getFavorites: state.heroes.favoritesId,
+    getEpisodeList: state.heroes.episodeList,
   };
 };
 
@@ -107,6 +142,7 @@ const dispatchStateToProps = (dispatch) => {
   return {
     setFavor: (id) => dispatch(setFavorite(id)),
     deleteFavor: (id) => dispatch(removeFavorite(id)),
+    setEpisodeList: (list) => dispatch(setEpisodeList(list)),
   };
 };
 
