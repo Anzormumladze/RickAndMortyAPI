@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   searchGender: [],
   searchStatus: [],
   searchSpecies: [],
+  sortedData: [],
 };
 
 const heroesReducer = (state = INITIAL_STATE, action) => {
@@ -52,6 +53,11 @@ const heroesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         searchSpecies: action.payload,
+      };
+    case heroesActionType.SORT_BY_NAME:
+      return {
+        ...state,
+        sortedData: action.payload,
       };
     default:
       return state;

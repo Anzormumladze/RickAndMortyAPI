@@ -64,3 +64,8 @@ export const searchSpecies = (text) => ({
   type: heroesActionType.SEARCH_SPECIES,
   payload: text,
 });
+
+export const sortByName = (text) => ({
+  type: heroesActionType.SORT_BY_NAME,
+  payload: text,
+});
