@@ -64,10 +64,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function Header({ getInput, getGender }) {
+function Header({ getInput, getGender, getStatus, getSpecies }) {
   const classes = useStyles();
   const handleInputChange = (e) => {
-    getInput(e.target.value, getGender);
+    getInput(e.target.value, getGender, getStatus, getSpecies);
   };
 
   return (
@@ -109,12 +109,15 @@ function Header({ getInput, getGender }) {
 
 const dispatchStateToProps = (dispatch) => {
   return {
-    getInput: (text, gender) => dispatch(searchEpisode(text, gender)),
+    getInput: (text, gender, status, species) =>
+      dispatch(searchEpisode(text, gender, status, species)),
   };
 };
 const mapStateToProps = (state) => {
   return {
     getGender: state.heroes.searchGender,
+    getStatus: state.heroes.searchStatus,
+    getSpecies: state.heroes.searchSpecies,
   };
 };
 

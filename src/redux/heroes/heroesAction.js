@@ -28,11 +28,17 @@ export const setPage = (page) => {
   };
 };
 
-export const searchEpisode = (text, gender) => {
+export const searchEpisode = (text, gender, status, species) => {
   const apiUrl = `https://rickandmortyapi.com/api/character/?name=${text}`;
   let changeableUrl = apiUrl;
-  if (gender) {
-    changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&gender=${gender}`;
+  if (gender && status && species) {
+    changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&gender=${gender}&status=${status}&species=${species}`;
+  }
+  if (status) {
+    changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&status=${status}`;
+  }
+  if (species) {
+    changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&species=${species}`;
   }
   return (dispatch) => {
     axios.get(changeableUrl).then((response) => {
@@ -46,5 +52,15 @@ export const searchEpisode = (text, gender) => {
 
 export const searchGender = (text) => ({
   type: heroesActionType.SEARCH_GENDER,
+  payload: text,
+});
+
+export const searchStatus = (text) => ({
+  type: heroesActionType.SEARCH_STATUS,
+  payload: text,
+});
+
+export const searchSpecies = (text) => ({
+  type: heroesActionType.SEARCH_SPECIES,
   payload: text,
 });

@@ -6,6 +6,8 @@ const INITIAL_STATE = {
   Pages: [],
   searchInput: "",
   searchGender: [],
+  searchStatus: [],
+  searchSpecies: [],
 };
 
 const heroesReducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +42,16 @@ const heroesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         searchGender: action.payload,
+      };
+    case heroesActionType.SEARCH_STATUS:
+      return {
+        ...state,
+        searchStatus: action.payload,
+      };
+    case heroesActionType.SEARCH_SPECIES:
+      return {
+        ...state,
+        searchSpecies: action.payload,
       };
     default:
       return state;
