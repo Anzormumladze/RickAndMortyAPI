@@ -75,3 +75,15 @@ export const sortByStatus = (text) => ({
   type: heroesActionType.SORT_BY_STATUS,
   payload: text,
 });
+
+export const detailPage = (url) => {
+  return (dispatch) => {
+    const apiUrl = url;
+    axios.get(apiUrl).then((response) => {
+      dispatch({
+        type: heroesActionType.SHOW_MORE,
+        episode: response.data,
+      });
+    });
+  };
+};

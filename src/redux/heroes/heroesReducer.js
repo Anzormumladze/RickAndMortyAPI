@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   searchSpecies: [],
   sortedData: [],
   sortedDataSpecies: [],
+  detailData: [],
 };
 
 const heroesReducer = (state = INITIAL_STATE, action) => {
@@ -61,10 +62,14 @@ const heroesReducer = (state = INITIAL_STATE, action) => {
         sortedData: action.payload,
       };
     case heroesActionType.SORT_BY_STATUS:
-      console.log(action);
       return {
         ...state,
         sortedDataSpecies: action.payload,
+      };
+    case heroesActionType.SHOW_MORE:
+      return {
+        ...state,
+        detailData: action.episode,
       };
     default:
       return state;

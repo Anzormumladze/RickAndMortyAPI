@@ -9,4 +9,5 @@ export const heroesActionType = {
   SEARCH_SPECIES: "SEARCH_SPECIES",
   SORT_BY_NAME: "SORT_BY_NAME",
   SORT_BY_STATUS: "SORT_BY_STATUS",
+  SHOW_MORE: "SHOW_MORE",
 };

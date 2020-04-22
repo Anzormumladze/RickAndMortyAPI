@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { searchEpisode } from "../../redux/heroes/heroesAction";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import PropTypes, { object } from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -123,7 +123,7 @@ const mapStateToProps = (state) => {
 
 Header.propTypes = {
   getInput: PropTypes.func,
-  getGender: PropTypes.object,
+  getGender: PropTypes.arrayOf(object),
   getStatus: PropTypes.object,
   getSpecies: PropTypes.object,
 };

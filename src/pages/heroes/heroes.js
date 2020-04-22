@@ -5,7 +5,7 @@ import { setCurrentData } from "../../redux/heroes/heroesAction";
 import HeroesList from "../../components/heroes/heroesList";
 import PropTypes from "prop-types";
 
-const Heroes = ({ setData }) => {
+const Heroes = ({ setData, history }) => {
   useEffect(() => {
     const fetchAPI = async () => {
       const initialData = await fetchCharacterData();
@@ -13,7 +13,7 @@ const Heroes = ({ setData }) => {
     };
     fetchAPI();
   }, [setData]);
-  return <HeroesList />;
+  return <HeroesList history={history} />;
 };
 const dispatchStateToProps = (dispatch) => {
   return {
@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
 
 Heroes.propTypes = {
   setData: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(Heroes);

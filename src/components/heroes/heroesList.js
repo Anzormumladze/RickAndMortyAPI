@@ -5,6 +5,7 @@ import {
   setFavorite,
   removeFavorite,
   setPage,
+  detailPage,
 } from "../../redux/heroes/heroesAction";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -45,7 +46,15 @@ const useStyles = makeStyles({
   },
 });
 
-function HeroList({ getData, getFavorites, setFavor, deleteFavor, setPage }) {
+function HeroList({
+  getData,
+  getFavorites,
+  setFavor,
+  deleteFavor,
+  setPage,
+  history,
+  setDetailPage,
+}) {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {
@@ -56,8 +65,12 @@ function HeroList({ getData, getFavorites, setFavor, deleteFavor, setPage }) {
   };
 
   const paginationEventHandel = (event, value) => {
-    console.log(typeof setPage);
     setPage(value);
+  };
+
+  const moreDetailsHanlder = (data) => {
+    setDetailPage(data.url);
+    history.push("/heroes/details");
   };
   const classes = useStyles();
 
@@ -123,9 +136,12 @@ function HeroList({ getData, getFavorites, setFavor, deleteFavor, setPage }) {
                     >
                       {isInFavorite(data.id) ? "remove" : "add"}
                     </Button>
-                    <IconButton aria-label="share">
-                      <ShareIcon />
-                    </IconButton>
+                    <Button
+                      onClick={() => moreDetailsHanlder(data)}
+                      size="medium"
+                    >
+                      show more
+                    </Button>
                   </CardActions>
                 </Card>
               );
@@ -156,15 +172,17 @@ const dispatchStateToProps = (dispatch) => {
     setFavor: (id) => dispatch(setFavorite(id)),
     deleteFavor: (id) => dispatch(removeFavorite(id)),
     setPage: (page) => dispatch(setPage(page)),
+    setDetailPage: (url) => dispatch(detailPage(url)),
   };
 };
 
 HeroList.propTypes = {
-  getData: PropTypes.object,
+  getData: PropTypes.array,
   getFavorites: PropTypes.arrayOf(object),
   setFavor: PropTypes.func,
   deleteFavor: PropTypes.func,
   setPage: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(HeroList);
