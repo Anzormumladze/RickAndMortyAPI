@@ -15,9 +15,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Pagination from "@material-ui/lab/Pagination";
-import AppBar from "../appBar";
+import AppBar from "./appBar";
 import PropTypes, { object } from "prop-types";
-import Buttons from "../button";
+import Buttons from "./button";
 
 const useStyles = makeStyles({
   cardContainer: {

@@ -7,7 +7,7 @@ import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
-import { searchEpisode } from "../redux/episodes/episodesActions";
+import { searchEpisode } from "../../redux/episodes/episodesActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 

@@ -2,11 +2,10 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
-import { sortByName, sortByTime } from "../redux/episodes/episodesActions";
+import { sortByName, sortByTime } from "../../redux/episodes/episodesActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import NavigationIcon from "@material-ui/icons/Navigation";
-import Fab from "@material-ui/core/Fab";
+import NavigationButtons from "./navigationButtons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BasicButtonGroup({ setSort, getData, setSortByTime, history }) {
-  console.log(history);
   const classes = useStyles();
   const handleSort = () => {
     if (getData) {
@@ -44,19 +42,7 @@ function BasicButtonGroup({ setSort, getData, setSortByTime, history }) {
   };
   return (
     <div>
-      <div>
-        <Fab
-          variant="extended"
-          onClick={() => history.push("/episode/favorites")}
-        >
-          <NavigationIcon className={classes.extendedIcon} />
-          Navigate to Favorites Page
-        </Fab>
-        <Fab variant="extended">
-          <NavigationIcon className={classes.extendedIcon} />
-          Navigate to Heroes Page
-        </Fab>
-      </div>
+      <NavigationButtons history={history} />
       <div className={classes.root}>
         <ButtonGroup color="primary" aria-label="outlined primary button group">
           <Button onClick={handleSort}>Sort by name</Button>
