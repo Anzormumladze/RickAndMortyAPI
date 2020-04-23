@@ -1,11 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  setFavorite,
-  removeFavorite,
-  setPage,
-  detailPage,
-} from "../../redux/episodes/episodesActions";
+import {setFavorite,removeFavorite,setPage,detailPage} from "../../redux/episodes/episodesActions";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -36,15 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-const EpisodesList = ({
-  getData,
-  getFavorites,
-  setFavor,
-  deleteFavor,
-  setPage,
-  history,
-  setDetailPageData,
-}) => {
+const EpisodesList = ({getData, getFavorites,setFavor,deleteFavor,setPage,history,setDetailPageData}) => {
   const isInFavorite = (id) => getFavorites.find((myId) => myId === id);
   const clickHandler = (item) => {
     if (isInFavorite(item.id)) {

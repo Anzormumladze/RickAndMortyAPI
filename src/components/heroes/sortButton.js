@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { sortByName, sortByStatus } from "../../redux/heroes/heroesAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import NavigationButtons from "./navigationButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SortButton({ getData, setSort, setSortByStatus }) {
+function SortButton({ getData, setSort, setSortByStatus, history }) {
   const classes = useStyles();
   const handleNameSort = () => {
     if (getData) {
@@ -40,11 +41,14 @@ function SortButton({ getData, setSort, setSortByStatus }) {
     }
   };
   return (
-    <div className={classes.root}>
-      <ButtonGroup color="primary" aria-label="outlined primary button group">
-        <Button onClick={handleNameSort}>Sort by Name</Button>
-        <Button onClick={handleSortByStatus}>Sort by Status</Button>
-      </ButtonGroup>
+    <div>
+      <NavigationButtons history={history} />
+      <div className={classes.root}>
+        <ButtonGroup color="primary" aria-label="outlined primary button group">
+          <Button onClick={handleNameSort}>Sort by Name</Button>
+          <Button onClick={handleSortByStatus}>Sort by Status</Button>
+        </ButtonGroup>
+      </div>
     </div>
   );
 }

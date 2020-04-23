@@ -5,6 +5,8 @@ import EpisodeDetail from "./pages/episodes/episodeDetail";
 import HeroesPage from "./pages/heroes/heroes";
 import HeroesDetail from "./pages/heroes/heroesDetail";
 import FavoritePages from "./pages/episodes/episodeFavorite";
+import FavoritePage from "./pages/heroes/heroesFavorite";
+
 function App() {
   return (
     <Router>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/episode/favorites" component={FavoritePages} />
         <Route path="/heroes" exact component={HeroesPage} />
         <Route path="/heroes/details" component={HeroesDetail} />
+        <Route path="/heroes/favorites" component={FavoritePage} />
       </Switch>
     </Router>
   );

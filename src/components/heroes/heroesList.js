@@ -77,11 +77,11 @@ function HeroList({
       <div style={{ marginBottom: "20px" }}>
         <Header />
       </div>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <SortButton />
-      </div>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Checkbox />
+      <div>
+        <SortButton history={history} />
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Checkbox />
+        </div>
       </div>
       <div className={classes.cardContainer}>
         {getData.results
