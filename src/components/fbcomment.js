@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-class FbComment extends React.Component {
-  componentDidMount() {
+const FbComment = () => {
+  useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: "xxxxxxxxx",
@@ -10,7 +10,6 @@ class FbComment extends React.Component {
         version: "v3.0",
       });
     };
-
     (function (d, s, id) {
       var js,
         fjs = d.getElementsByTagName(s)[0];
@@ -20,20 +19,19 @@ class FbComment extends React.Component {
       js.src = "//connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
-  }
+  }, []);
 
-  componentDidUpdate() {
+  useEffect(() => {
     window.FB.XFBML.parse();
-  }
-  render() {
-    return (
-      <div
-        className="fb-comments"
-        data-href="http://localhost:3000/episode/details"
-        data-numposts="5"
-        data-width=""
-      ></div>
-    );
-  }
-}
+  });
+
+  return (
+    <div
+      className="fb-comments"
+      data-href="http://localhost:3000/episode/details"
+      data-numposts="5"
+      data-width=""
+    ></div>
+  );
+};
 export default FbComment;
