@@ -16,6 +16,8 @@ import {
   removeFavorite,
   setEpisodeList,
 } from "../../redux/heroes/heroesAction";
+import PropTypes, { object } from "prop-types";
+
 const useStyles = makeStyles({
   cardContainer: {
     display: "flex",
@@ -144,6 +146,15 @@ const dispatchStateToProps = (dispatch) => {
     deleteFavor: (id) => dispatch(removeFavorite(id)),
     setEpisodeList: (list) => dispatch(setEpisodeList(list)),
   };
+};
+
+HeroesDetails.propTypes = {
+  getDetailData: PropTypes.array,
+  getFavorites: PropTypes.arrayOf(object),
+  setFavor: PropTypes.func,
+  deleteFavor: PropTypes.func,
+  setEpisodeList: PropTypes.func,
+  getEpisodeList: PropTypes.arrayOf(object),
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(HeroesDetails);

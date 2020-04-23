@@ -181,6 +181,7 @@ HeroList.propTypes = {
   deleteFavor: PropTypes.func,
   setPage: PropTypes.func,
   history: PropTypes.object,
+  setDetailPage: PropTypes.func,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(HeroList);

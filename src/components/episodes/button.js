@@ -69,6 +69,7 @@ BasicButtonGroup.propTypes = {
   getData: PropTypes.object,
   setSortByName: PropTypes.func,
   setSortByTime: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(BasicButtonGroup);

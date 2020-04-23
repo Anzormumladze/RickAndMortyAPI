@@ -5,6 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   cardContainer: {
@@ -73,21 +74,6 @@ const Favorites = ({ favoritesId }) => {
                     {data.episode}
                   </Typography>
                 </CardContent>
-                {/* <CardActions>
-                    <Button
-                      onClick={() => clickHandler(data)}
-                      startIcon={
-                        isInFavorite(data.id) ? (
-                          <FavoriteIcon />
-                        ) : (
-                          <FavoriteBorderIcon />
-                        )
-                      }
-                      size="medium"
-                    >
-                      {isInFavorite(data.id) ? "remove" : "add"}
-                    </Button>
-                  </CardActions> */}
               </Card>
             );
           })
@@ -100,6 +86,10 @@ const mapStateToProps = (state) => {
   return {
     favoritesId: state.episodes.favoritesId,
   };
+};
+
+Favorites.propTypes = {
+  favoritesId: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(Favorites);
