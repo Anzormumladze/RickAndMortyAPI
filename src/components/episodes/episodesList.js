@@ -67,7 +67,7 @@ const EpisodesList = ({
       <div style={{ marginBottom: "20px" }}>
         <AppBar />
       </div>
-      <Buttons />
+      <Buttons history={history} />
       <div className={classes.cardContainer}>
         {getData.results
           ? getData.results.map((data) => {
