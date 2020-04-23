@@ -14,10 +14,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import Pagination from "@material-ui/lab/Pagination";
 import AppBar from "./appBar";
 import PropTypes, { object } from "prop-types";
 import Buttons from "./button";
+import Pagination from "./pagination";
 
 const useStyles = makeStyles({
   cardContainer: {
@@ -134,7 +134,7 @@ const EpisodesList = ({
       <div className={classes.paginationContainer}>
         <Pagination
           count={getData.info ? getData.info.pages : 1}
-          onChange={paginationEventHandel}
+          onChangeHandler={paginationEventHandel}
         />
       </div>
     </div>

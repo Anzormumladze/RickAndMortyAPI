@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BasicButtonGroup({ setSort, getData, setSortByTime, history }) {
+function BasicButtonGroup({ setSortByName, getData, setSortByTime, history }) {
   const classes = useStyles();
   const handleSort = () => {
     if (getData) {
@@ -28,7 +28,7 @@ function BasicButtonGroup({ setSort, getData, setSortByTime, history }) {
         if (a.name > b.name) return 1;
         return 0;
       });
-      setSort(sorted);
+      setSortByName(sorted);
     }
   };
   const handleSortByTime = () => {
@@ -60,14 +60,14 @@ const mapStateToProps = (state) => {
 
 const dispatchStateToProps = (dispatch) => {
   return {
-    setSort: (text) => dispatch(sortByName(text)),
+    setSortByName: (text) => dispatch(sortByName(text)),
     setSortByTime: (time) => dispatch(sortByTime(time)),
   };
 };
 
 BasicButtonGroup.propTypes = {
   getData: PropTypes.object,
-  setSort: PropTypes.func,
+  setSortByName: PropTypes.func,
   setSortByTime: PropTypes.func,
 };
 
