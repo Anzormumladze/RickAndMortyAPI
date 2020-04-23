@@ -49,7 +49,7 @@ const Favorites = ({ favoritesId }) => {
       const dataState = [...data, result.data];
       setData(dataState);
     });
-  }, [data]);
+  }, [data,favoritesId]);
   return (
     <div className={classes.cardContainer}>
       {data

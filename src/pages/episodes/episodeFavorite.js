@@ -35,7 +35,7 @@ const Favorites = ({ favoritesId }) => {
       const dataState = [...data, result.data];
       setData(dataState);
     });
-  }, [data]);
+  }, [favoritesId,data]);
   return (
     <div className={classes.cardContainer}>
       {data

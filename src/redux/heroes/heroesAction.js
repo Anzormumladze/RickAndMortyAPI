@@ -32,14 +32,8 @@ export const setPage = (page) => {
 export const searchEpisode = (text, gender, status, species) => {
   const apiUrl = `https://rickandmortyapi.com/api/character/?name=${text}`;
   let changeableUrl = apiUrl;
-  if (gender && status && species) {
+  if (gender || status || species) {
     changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&gender=${gender}&status=${status}&species=${species}`;
-  }
-  if (status) {
-    changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&status=${status}`;
-  }
-  if (species) {
-    changeableUrl = `https://rickandmortyapi.com/api/character/?name=${text}&species=${species}`;
   }
   return (dispatch) => {
     axios.get(changeableUrl).then((response) => {
